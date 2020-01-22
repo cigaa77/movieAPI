@@ -14,4 +14,15 @@ router.get('/', (req, res) => {
     })
 })
 
+router.post('/', function (req, res) {
+  const movie = new Movie(req.body);
+  movie.save()
+    .then((data) => {
+      res.json(data)
+    })
+    .catch((err) => {
+      res.json(err)
+    })
+});
+
 module.exports = router;

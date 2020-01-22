@@ -55,4 +55,16 @@ router.delete('/id/:movie_id', (req, res) => {
     })
 })
 
+router.get('/top10', (req, res) => {
+  Movie.find({})
+    .limit(10)
+    .sort({ imdb_score: -1 })
+    .then((data) => {
+      res.json(data)
+    })
+    .catch(err => {
+      res.json(err)
+    })
+})
+
 module.exports = router;

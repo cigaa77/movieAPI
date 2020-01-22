@@ -35,4 +35,14 @@ router.get('/id/:movie_id', (req, res) => {
     })
 })
 
+router.put('/id/:movie_id', (req, res) => {
+  Movie.findByIdAndUpdate(req.params.movie_id, req.body, { new: true })
+    .then((data) => {
+      res.json(data)
+    })
+    .catch((err) => {
+      res.json(err)
+    })
+})
+
 module.exports = router;

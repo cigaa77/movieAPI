@@ -67,4 +67,17 @@ router.get('/top10', (req, res) => {
     })
 })
 
+router.get('/between/:start_year/:end_year', (req, res) => {
+  const { start_year, end_year } = req.params;
+  Movie.find({
+    year: { '$gte': parseInt(start_year), '$lte': parseInt(end_year) }
+  })
+    .then(data => {
+      res.json(data)
+    })
+    .catch(err => {
+      res.json(err)
+    })
+})
+
 module.exports = router;

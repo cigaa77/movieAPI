@@ -25,4 +25,14 @@ router.post('/', function (req, res) {
     })
 });
 
+router.get('/id/:movie_id', (req, res) => {
+  Movie.findById(req.params.movie_id)
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      res.json(err);
+    })
+})
+
 module.exports = router;

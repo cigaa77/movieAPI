@@ -125,4 +125,14 @@ router.put('/:director_id', (req, res) => {
     })
 })
 
+router.delete('/:director_id', (req, res) => {
+  Director.findByIdAndRemove(req.params.director_id)
+    .then((data) => {
+      res.json(data)
+    })
+    .catch((err) => {
+      res.json(err)
+    })
+})
+
 module.exports = router;

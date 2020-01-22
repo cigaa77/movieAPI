@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 // Models
-const Director=require('../models/Director');
+const Director = require('../models/Director');
 
 router.post('/', (req, res) => {
   const director = new Director(req.body);
@@ -13,6 +13,53 @@ router.post('/', (req, res) => {
     .catch(err => {
       res.json(err)
     })
+})
+
+router.get('/', (req, res) => {
+  Director.aggregate([
+    {
+      $lookup: {
+        from: 'movies',
+        localField: '_id',
+        foreignField: 'director_id',
+        as: 'movie'
+      }
+    },
+    {
+      $unwind: {
+        path: '$movie',
+        // Eşleşme olmayan sonucların da dönmesini sağlar
+        preserveNullAndEmptyArrays: true
+      }
+    },
+    {
+      $group: {
+        _id: {
+          _id: '$_id',
+          name: '$name',
+          surname: '$surname',
+          bio: '$bio'
+        },
+        movies: {
+          $push: '$movie'
+        }
+      }
+    },
+    {
+      $project: {
+        _id: '$_id._id',
+        name: '$_id.name',
+        surname: '$_id.surname',
+        bio: '$_id.bio',
+        movies: '$movies'
+      }
+    }
+  ]).then(data => {
+    res.json(data)
+  }).catch(err => {
+    res.json(err)
+  })
+
 })
 
 module.exports = router;

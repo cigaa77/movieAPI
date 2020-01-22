@@ -113,7 +113,16 @@ router.get('/:director_id', (req, res) => {
   }).catch(err => {
     res.json(err)
   })
+})
 
+router.put('/:director_id', (req, res) => {
+  Director.findByIdAndUpdate(req.params.director_id, req.body, { new: true })
+    .then((data) => {
+      res.json(data)
+    })
+    .catch((err) => {
+      res.json(err)
+    })
 })
 
 module.exports = router;

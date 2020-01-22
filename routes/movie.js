@@ -45,4 +45,14 @@ router.put('/id/:movie_id', (req, res) => {
     })
 })
 
+router.delete('/id/:movie_id', (req, res) => {
+  Movie.findByIdAndRemove(req.params.movie_id)
+    .then((data) => {
+      res.json(data)
+    })
+    .catch((err) => {
+      res.json(err)
+    })
+})
+
 module.exports = router;

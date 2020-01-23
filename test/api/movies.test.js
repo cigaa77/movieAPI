@@ -29,5 +29,32 @@ describe('/api/movies Tests', () => {
                     done();
                 })
         })
+    });
+    describe('/POST Movie', () => {
+        it('it should POST a movie', (done) => {
+            const movie = {
+                title: 'UdemyTest',
+                director_id: '5a34e1afb8523a78631f8540',
+                category: 'Komedi',
+                country: 'Türkiye',
+                year: 1980,
+                imdb_score: 6
+            };
+            chai.request(server)
+                .post('/api/movies')
+                .send(movie)
+                .set('x-access-token', token)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('title');
+                    res.body.should.have.property('director_id');
+                    res.body.should.have.property('category');
+                    res.body.should.have.property('country');
+                    res.body.should.have.property('year');
+                    res.body.should.have.property('imdb_score');
+                    done();
+                })
+        })
     })
 })

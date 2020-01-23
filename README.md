@@ -22,7 +22,6 @@ Express ve MongoDB ile RestfullAPI
 | /api/directors/:director_id | `GET` | Empty | Get a director. |
 | /api/directors/:director_id | `PUT` | {'name':'foo', 'surname':'bar', 'bio': 'lorem'} | Update a director with new info. |
 | /api/directors/:director_id | `DELETE` | Empty | Delete a director. |
-| /api/directors/:director_id/best10movie | `GET` | Empty | The director's top 10 films. |
  
 # Index
  

@@ -1,3 +1,5 @@
+[![Build status](https://api.travis-ci.com/cigaa77/movieAPI.svg)](https://travis-ci.com/cigaa77/movieAPI)
+
 # movieAPI
 Express ve MongoDB ile RestfullAPI
 
